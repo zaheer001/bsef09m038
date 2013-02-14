@@ -1,0 +1,106 @@
+﻿@{// Initialize page
+var email = "";
+var password = "";
+var confirmPassword = "";
+var ErrorMessage = "";
+
+// If this is a POST request, validate and process data
+if (IsPost)
+{
+email = Request.Form["email"];
+password = Request.Form["password"];
+confirmPassword = Request.Form["confirmPassword"];
+
+if (email.IsEmpty() || password.IsEmpty()) {
+ErrorMessage = "You must specify both email and password.";}
+
+if (password != confirmPassword) {
+ErrorMessage = "Password and confirmation do not match.";}
+
+// If all information is valid, create a new account
+if (ErrorMessage=="")
+{ 
+var db = Database.Open("Users");
+var user = db.QuerySingle("SELECT Email FROM UserProfile WHERE LOWER(Email) = LOWER(@0)", email);
+if (user == null)
+{
+db.Execute("INSERT INTO UserProfile (Email) VALUES (@0)", email);
+WebSecurity.CreateAccount(email, password, false);
+
+// Navigate back to the homepage and exit
+Response.Redirect("~/");
+} 
+else {ErrorMessage = "Email address is already in use.";}
+}
+}
+}
+
+@if (ErrorMessage!="")
+{
+<p>@ErrorMessage</p> 
+<p>Please correct the errors and try again.</p>
+}
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="">
+
+        <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+        <style type="text/css">
+            body {
+                margin: 0 auto;
+                width: 800px;
+                color: #808080
+            }   
+        .container {  
+        margin-top: 40px;
+        margin-bottom: 10px;
+            }
+            
+            .menu{ 
+                width: 1394px;
+                height: 100px;
+                margin-bottom: 20px;
+            }
+             
+    </style>
+
+    </head>
+    <body>
+        
+        <script src="~/jquery.js"></script>
+        <script src="~/bootstrap/js/bootstrap.js"></script>
+
+        @RenderPage("_header.cshtml")
+
+        <form action="" method="post">
+        <div class="hero-unit">
+        <h2>Sign Up Page</h2><br>
+        <p>Username</p> <input type="text" id="usr" name="email" class="span3" placeholder="Enter Username…">
+        <p>Password</p> <input type="password" id="ps1" class="span3" name="password" placeholder="Enter Password…">
+        <p>Confirm Password</p> <input type="password" id="ps2" class="span3" name="confirmPassword" placeholder="Confirm Password…">
+        <p> <br>
+        <button type="submit" class="btn btn-info btn-large"> Sign Up </button> <button type="submit" class="btn btn-info btn-large"> Cancel </button>
+        </p>
+</div></form>
+        
+
+         <hr>  
+  
+      <footer>  
+        <p>© Company 2012</p>  
+      </footer>  
+  
+    </div> <!-- /container --> 
+
+    </body>
+</html>

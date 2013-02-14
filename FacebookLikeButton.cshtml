@@ -1,0 +1,41 @@
+﻿@using Microsoft.Web.Helpers;
+@{ 
+    Bing.SiteTitle = "boot site"; 
+    Bing.SiteUrl = "http://localhost:4937/"; 
+} 
+ 
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Facebook 'Like' Button</title>
+        <style>body {font-family:verdana;font-size:9pt;}</style>
+    </head>
+    <body>
+        @Facebook.GetInitializationScripts()
+        @Facebook.ActivityFeed("www.bbc.co.uk") 
+        @Bing.SearchBox() 
+        @Twitter.Faves("stevelydford") 
+        @Facebook.GetInitializationScripts() 
+        @Facebook.LikeButton("www.asp.net")
+
+        @Twitter.Search("Football", tweetsBackgroundColor: "#eeeeee") 
+        @Twitter.Profile("stevelydford") 
+        
+        @Twitter.List("stevelydford", "web-development") 
+
+        @Twitter.FollowButton("stevelydford") 
+    
+        <p>Points to the current page, uses default settings:</p>
+        
+
+    <p>Points to the ASP.NET Web site:</p>
+        
+         @Facebook.LikeButton(
+          href: "http://www.asp.net/webmatrix",
+          action: "recommend",
+          width: 250,
+          buttonLayout: "button_count",
+          showFaces: true,
+          colorScheme: "dark")
+    </body>
+</html>

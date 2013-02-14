@@ -1,0 +1,140 @@
+﻿@{ 
+    var db = Database.Open("pizza");
+    var prod = db.Query("SELECT * FROM products").ToList();
+    var featured = prod[new Random().Next(prod.Count)];  
+
+    int quan = 0;
+    int cost = 0;
+    int count = 0;
+
+
+    if(IsPost)
+    {
+  
+        quan = Convert.ToInt32(Request.Cookies["quantity"].Value)+1;
+        cost = Convert.ToInt32(Request.Cookies["cost"].Value);
+
+        Response.Cookies["quantity"].Value = quan.ToString();
+        Response.Cookies["cost"].Value = cost.ToString();
+    }
+
+    else
+    {
+        Response.Cookies["quantity"].Value = quan.ToString();
+        Response.Cookies["cost"].Value = cost.ToString();
+    }
+
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="">
+
+        <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+        <style type="text/css">
+            body {
+                margin: 0 auto;
+                width: 920px;
+                color: #808080
+            }
+
+            .cust {
+                width: 200px;
+                height: 150px;
+            }
+            
+        .container {  
+            width: 1000px;    
+        margin-top: 40px;
+        margin-bottom: 10px;
+            }
+            
+            
+            .menu{ 
+                width: 1394px;
+                height: 100px;
+                margin-bottom: 20px;
+            }
+            .sidebar {
+                width: 200px;
+                float: left;
+            }
+            .mainbody {
+                width: 700px;
+                margin-left: 30px;
+                float: left;
+            }
+             
+    </style>
+
+    </head>
+    <body>
+        
+        @helper done(int price)
+        {
+           
+        }
+
+        <script src="~/jquery.js"></script>
+        <script src="~/bootstrap/js/bootstrap.js"></script>
+
+        @RenderPage("_header.cshtml")
+
+<form action="" method="post">
+        <div class="container">
+            <div class="sidebar">  
+<ul class="thumbnails">  
+
+        <li class="span3">  
+          <div class="thumbnail">  <h5> Pizza Hutt Cart </h5>
+            <img src="~/c1.jpg" alt="product 1">  
+            <div class="caption">  
+              <h5>Total Price $@cost</h5>  
+               
+              <p><a href="#" class="btn btn-warning">Total Purchased Items @quan</a> </p>  
+            </div>  
+          </div>  
+        </li>  
+      </ul>  
+                </div>
+            <div class="mainbody">    
+<ul class="thumbnails">  
+
+
+    @foreach (var p in prod) {
+    
+        count++;
+
+        <li class="span3">  
+          <div class="thumbnail">    <h5>@p.itemId. @p.itemName </h5>
+            <img src="~/@p.itemImage" class="cust" alt="product 2">  
+            <div class="caption">  
+              <h4>$@p.itemPrice</h4> <p>@p.itemDesc</p>  
+              
+              <p><button type="submit" name="btn@count" onclick="done(7)" class="btn btn-success">Order Now</button></p>  
+            </div>  
+          </div>  
+        </li>  
+    }
+    </ul>
+      
+  
+
+      <hr>  
+  
+      <footer>  
+        <p>© Company 2012</p>  
+      </footer>  
+  
+    </div></div> <!-- /container -->  
+    </form>
+    </body>
+</html>

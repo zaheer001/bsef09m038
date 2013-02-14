@@ -1,0 +1,102 @@
+﻿@{
+  
+  if(WebSecurity.IsAuthenticated)
+  {
+      WebSecurity.Logout();
+      Response.Redirect("~/Default.cshtml");
+  }
+  
+  // Initialize page
+var username = "";
+var password = "";
+var ErrorMessage = "";
+
+// If this is a POST request, validate and process data
+if (IsPost)
+{
+username = Request.Form["username"];
+password = Request.Form["password"];
+if (username.IsEmpty() || password.IsEmpty())
+{
+ErrorMessage = "You must specify a username and password.";
+} 
+else
+{
+// Login, Navigate back to the homepage and exit
+if (WebSecurity.Login(username, password, false))
+{Response.Redirect("~/");}
+else
+{ErrorMessage = "Login failed";}
+}
+}
+}
+
+@if (ErrorMessage!="") {
+<p>@ErrorMessage</p> 
+<p>Please correct the errors and try again.</p>
+}
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="">
+
+        <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+        <style type="text/css">
+            body {
+                margin: 0 auto;
+                width: 800px;
+                color: #808080
+            }   
+        .container {  
+        margin-top: 40px;
+        margin-bottom: 10px;
+            }
+            
+            .menu{ 
+                width: 1394px;
+                height: 100px;
+                margin-bottom: 20px;
+            }
+             
+    </style>
+
+    </head>
+    <body>
+        
+        
+        <script src="~/jquery.js"></script>
+        <script src="~/bootstrap/js/bootstrap.js"></script>
+
+        @RenderPage("_header.cshtml")
+
+        <form action="" method="post">
+        
+        <div class="hero-unit">
+        <h2>Login Page</h2><br>
+        <p>Username <input type="text" id="usr" class="span3" name="username" placeholder="Enter Username…"></p>
+        <p>Password <input type="password" id="psw" class="span3" name="password" placeholder="Enter Password…"></p>
+        <p> <br>
+        <button type="submit" class="btn btn-info btn-large"> Submit </button> <button type="submit" class="btn btn-info btn-large"> Cancel </button>
+        </p>
+            </div>
+            </form>
+
+
+
+         <hr>  
+  
+      <footer>  
+        <p>© Company 2012</p>  
+      </footer>  
+  
+    </div> <!-- /container --> 
+
+    </body>
+</html>

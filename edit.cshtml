@@ -1,0 +1,115 @@
+﻿@{// Initialize page
+var id = "";
+var name = "";
+var price = "";
+var path = "";
+var ErrorMessage = "";
+
+// If this is a POST request, validate and process data
+if (IsPost)
+{
+
+id = Request["id"];
+name = Request["name"];
+price = Request["price"];
+path = Request["path"];
+
+if ( id.IsEmpty() ) {
+    ErrorMessage = "You must specify Item ID...";}
+
+if (ErrorMessage=="")
+{
+    var db = Database.Open("pizza");
+    db.Execute("UPDATE products SET itemName='" + name + "',itemPrice='" + price+  "' WHERE itemId=" + id);
+    Response.Redirect("~/");    
+}
+
+}
+}
+
+@if (ErrorMessage!="")
+{
+<p>@ErrorMessage</p> 
+<p>Please correct the errors and try again.</p>
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="">
+
+        <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+
+
+        @*          STYLING FORM  ........................................................ *@
+
+
+
+        <style type="text/css">
+            body {
+                margin: 0 auto;
+                width: 800px;
+                color: #808080
+            }   
+        .container {  
+        margin-top: 40px;
+        margin-bottom: 10px;
+            }
+            
+            .menu{ 
+                width: 1394px;
+                height: 100px;
+                margin-bottom: 20px;
+            }
+             
+    </style>
+
+    </head>
+    <body>
+        
+        
+        <script src="~/jquery.js"></script>
+        <script src="~/bootstrap/js/bootstrap.js"></script>
+
+        @RenderPage("_header.cshtml")
+
+
+
+          @*ADD/EDIT ITEM FORM  ........................................................*@
+
+
+
+        <form action="" method="post" name="frm1" class="well">
+        <h3>Edit Item Menu</h3>
+        <p> Item Ident. <input type="text" name="id" class="span3" placeholder="Item ID…"></p>
+        <p> Item Name <input type="text" name="name" class="span3" placeholder="Item Name…"></p>
+        <p> Item Price <input type="text" name="price" class="span3" placeholder="Item Price…"></p>
+        @*<p>  <input type="file" name="path" class="span3" value="Browse file"></p>*@
+
+
+        <button type="submit" name="sub1" class="btn">Submit</button>
+        
+        </form>
+
+
+
+        @*          FOOTER  ........................................................*@
+
+
+         <hr>  
+  
+      <footer>  
+        <p>© Company 2012</p>  
+      </footer>  
+  
+    </div> <!-- /container --> 
+
+    </body>
+</html>

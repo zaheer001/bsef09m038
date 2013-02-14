@@ -1,0 +1,103 @@
+﻿@{
+    if(IsPost)
+    {
+        Response.Redirect("~/products.cshtml");
+    }
+}
+
+<!DOCTYPE html>
+@using Microsoft.Web.Helpers;
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>My Site's Title</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="">
+
+        <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+        <style type="text/css">
+            body {
+                margin: 0 auto;
+                width: 900px;
+                color: #808080
+            }   
+        .container {  
+        margin-top: 40px;
+        margin-bottom: 10px;
+            }
+            
+         .sizer{
+                width: 1394px;
+                height: 500px;
+            }
+           
+            .menu{ 
+                width: 1394px;
+                height: 100px;
+                margin-bottom: 20px;
+            } 
+            
+    </style>
+
+    </head>
+    <body>
+     
+        <form action="" method="post" class="navbar-search pull-left">
+            <div class="span7"></div>
+        <input type="text" name="txt" class="search-query" placeholder="Search">
+            @Twitter.FollowButton("pizzahut", followStyle: "t_logo") 
+        </form>
+        
+        <script src="~/jquery.js"></script>
+        <script src="~/bootstrap/js/bootstrap.js"></script>
+
+        @RenderPage("_header.cshtml")
+        
+        
+        <div id="myCarousel" class="carousel slide">
+    <div class="carousel-inner">
+         
+        <div class="item active">
+            <img src="~/pz2.jpg" class="sizer" alt="1">
+            <div class="carousel-caption">
+                <h4>Pizza Hutt Offers</h4>
+                <p>Chicken Tikka...</p>
+            </div><!--end caption-->
+        </div><!--end item-->
+         
+         <div class="item">
+            <img src="~/pz3.jpg" class="sizer" alt="1">
+            <div class="carousel-caption">
+                <h4>Pizza Hutt Offers</h4>
+                <p>Barbie Cube</p>
+            </div><!--end caption-->
+        </div><!--end item-->
+         
+        <div class="item">
+            <img src="~/pz1.jpg" class="sizer" alt="1">
+            <div class="carousel-caption">
+                <h4>Pizza Hutt Offers</h4>
+                <p>Tanduri Masala</p>
+            </div><!--end caption-->
+        </div><!--end item-->
+
+    </div><!--end inner-->
+     
+    <!--nav-->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+</div>
+
+        <hr>  
+  
+      <footer>  
+        <p>© Company 2012</p>  
+      </footer>  
+  
+    </div> <!-- /container -->  
+        
+    </body>
+</html>

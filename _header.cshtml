@@ -1,0 +1,54 @@
+﻿
+
+<div class="container">  
+  <div class="row">  
+  <div class="span12">  
+  <ul class="nav nav-tabs">  
+        <li class="active"><a href="~/"><i class="icon-home"></i> Home</a></li>  
+        <li><a href="~/About.cshtml">About</a></li>  
+         <li><a href="~/products.cshtml">Pizza Details</a></li>
+        <li class="dropdown">  
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Site Details<b class="caret"></b></a>  
+          <ul class="dropdown-menu">  
+            @if(WebSecurity.IsAuthenticated)
+            {
+                <li><a href="~/admin.cshtml">Add Item</a></li>
+                <li><a href="~/edit.cshtml">Edit Item</a></li>
+                <li><a href="~/remove.cshtml">Remove Item</a></li>
+            }
+            else
+            {
+              <li><a href="http://www.google.com/pizza-hutt">Google.com</a></li> 
+              <li class="divider"></li>  
+            <li><a href="http://www.youtube.com/pizza-hutt">Youtube.com</a></li>    
+             }  
+          </ul>  
+        </li>  
+      <li class="dropdown">  
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Authentication<b class="caret bottom-up"></b></a>  
+          <ul class="dropdown-menu bottom-up pull-right">  
+            @if(WebSecurity.IsAuthenticated)
+            {
+                <li><a href="~/login.cshtml">Logout</a></li>
+                <li><a href="~/admin.cshtml">Admin</a></li>
+            }
+            else
+            {
+              <li><a href="~/login.cshtml">Login</a></li> 
+              <li class="divider"></li>  
+            <li><a href="~/signup.cshtml">Sign Up</a></li>    
+             }
+          </ul>  
+        </li>  
+
+      </ul>  
+</li>  
+</ul>  
+</div>  
+</div>  
+</div>
+
+<img src="~/main.jpg" class="menu" alt="1">  
+<script src="/twitter-bootstrap/twitter-bootstrap-v2/docs/assets/js/jquery.js"></script>  
+<script src="/twitter-bootstrap/twitter-bootstrap-v2/docs/assets/js/bootstrap-dropdown.js"></script>  
+<script src="/twitter-bootstrap/twitter-bootstrap-v2/docs/assets/js/application.js"></script>

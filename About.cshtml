@@ -1,0 +1,86 @@
+﻿@{
+    
+}
+@using Microsoft.Web.Helpers;
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="">
+
+        <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+        <style type="text/css">
+            body {
+                margin: 0 auto;
+                width: 920px;
+                color: #808080
+            }   
+        .container {  
+                
+        margin-top: 40px;
+        margin-bottom: 10px;
+            }
+            
+            .menu{ 
+                width: 1394px;
+                height: 100px;
+                margin-bottom: 20px;
+            }
+            
+            div#sidebar {
+    float: right;
+    margin:10px 0px 10px 30px;
+    width: 27%;
+}
+
+section#main {
+    float: left;
+    width: 65%;
+}
+             
+    </style>
+
+    </head>
+    <body>
+        
+         <script src="~/jquery.js"></script>
+        <script src="~/bootstrap/js/bootstrap.js"></script>
+
+        @RenderPage("_header.cshtml")
+
+<section id="main">
+        <h2> Pizza Hutt Services </h2>
+        
+        <p> 
+        Pizza Hutt was founded in 2010 and delivers pizza and fresh baked goods right to your door. 
+        In another life, Bill Baker was a developer by day and pastry chef by night.  
+        But soon Bill's innate skills with all things involving butter, flour and sugar put him 
+        even more in demand than his programming talents and what started out as a way to satisfy 
+        his own sweet tooth became all-consuming.  Pizza Cottage is not only a candy-coated wonderland 
+        of coffee, pastries, cookies and cakes, it also honors his tech background by employing a state 
+        of the art online ordering system that makes it easy for anybody with internet access to 
+        order his all natural, locally-sourced confections and have them delivered to their 
+        door within 24 hours.
+    </p>
+</section>
+
+<div id="sidebar">
+    @Twitter.Faves("pizzahut") 
+</div>
+
+    <hr>  
+  
+      <footer>  
+        <p><p>© Company 2012</p></p>  
+      </footer>  
+  
+    </div>
+
+    </body>
+</html>
